@@ -1,10 +1,12 @@
 <?php
 
+namespace RichCourt\Plugin\Content\RcGallery\View;
+
 defined('_JEXEC') or die;
 
 class ThumbnailView
 {
-    /** @var stdClass */
+    /** @var \stdClass */
     private $rcParams;
 
     /** @var string */
@@ -28,14 +30,14 @@ class ThumbnailView
     /** @var int */
     private $imageNumber;
 
-    /** @var DOMDocument */
+    /** @var \DOMDocument */
     private $dom;
 
     /** @var bool */
     private $thumbsExist;
 
     /**
-     * @param stdCLass $rcParams
+     * @param \stdClass $rcParams
      * @param string $title
      * @param string $targetUrl
      * @param int $width
@@ -45,7 +47,7 @@ class ThumbnailView
      * @param int $imageNumber
      * @param bool $thumbsExist
      */
-    public function __construct(stdClass $rcParams, $title, $targetUrl, $width, $height, array $images, $galleryNumber, $imageNumber, $thumbsExist)
+    public function __construct(\stdClass $rcParams, $title, $targetUrl, $width, $height, array $images, $galleryNumber, $imageNumber, $thumbsExist)
     {
         $this
             ->setRcParams($rcParams)
@@ -57,7 +59,7 @@ class ThumbnailView
             ->setGalleryNumber($galleryNumber)
             ->setImageNumber($imageNumber)
             ->setThumbsExist($thumbsExist)
-            ->setDom(new DOMDocument())
+            ->setDom(new \DOMDocument())
         ;
     }
 
@@ -123,7 +125,7 @@ class ThumbnailView
 
     /**
      * @param array $image
-     * @return DOMElement
+     * @return \DOMElement
      */
     private function buildSource(array $image)
     {
@@ -146,10 +148,8 @@ class ThumbnailView
     }
 
     /**
-     * using the 'data-___' attributes so the image can be lazy loaded
-     *
      * @param string $src
-     * @return DOMElement
+     * @return \DOMElement
      */
     private function buildImage($src)
     {
@@ -158,7 +158,7 @@ class ThumbnailView
         $elem->setAttribute('data-src', $src);
         $elem->setAttribute('style', sprintf(
             "margin: %dpx;",
-            $this->getRcParams()->imagemargin
+            (int) $this->getRcParams()->imagemargin
         ));
 
         if ($this->getRcParams()->usetitleasalt) {
@@ -174,7 +174,7 @@ class ThumbnailView
     }
 
     /**
-     * @return DOMElement
+     * @return \DOMElement
      */
     private function buildTitle()
     {
@@ -197,7 +197,7 @@ class ThumbnailView
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
     public function getRcParams()
     {
@@ -205,10 +205,10 @@ class ThumbnailView
     }
 
     /**
-     * @param stdClass $rcParams
+     * @param \stdClass $rcParams
      * @return self
      */
-    public function setRcParams(stdClass $rcParams)
+    public function setRcParams(\stdClass $rcParams)
     {
         $this->rcParams = $rcParams;
 
@@ -311,7 +311,7 @@ class ThumbnailView
     }
 
     /**
-     * @return DOMDocument
+     * @return \DOMDocument
      */
     public function getDom()
     {
@@ -319,10 +319,10 @@ class ThumbnailView
     }
 
     /**
-     * @param DOMDocument
-     * @return  self
+     * @param \DOMDocument $dom
+     * @return self
      */
-    public function setDom(DOMDocument $dom)
+    public function setDom(\DOMDocument $dom)
     {
         $this->dom = $dom;
 
@@ -339,7 +339,7 @@ class ThumbnailView
 
     /**
      * @param int $galleryNumber
-     * @return  self
+     * @return self
      */
     public function setGalleryNumber($galleryNumber)
     {

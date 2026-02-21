@@ -1,10 +1,12 @@
 <?php
 
+namespace RichCourt\Plugin\Content\RcGallery\Helper;
+
 defined('_JEXEC') or die;
 
 class ThumbnailFactory
 {
-    /** @var resource */
+    /** @var \GdImage|false */
     private $image;
 
     /** @var int */
@@ -13,13 +15,13 @@ class ThumbnailFactory
     /** @var int */
     private $height;
 
-    /** @var resource */
+    /** @var \GdImage|false */
     private $imageResized;
 
     /**
      * @param string $fileName
      */
-    public function __construct($fileName)
+    public function __construct(string $fileName)
     {
         $this->setImage($this->openImage($fileName));
 
@@ -36,19 +38,16 @@ class ThumbnailFactory
      * Some images are only rotated by their EXIF. This corrects that, so that their pixels are actually rotated.
      *
      * @param string $fileName
-     * @return void
      */
-    private function correctRotation($fileName)
+    private function correctRotation(string $fileName): void
     {
         if (!function_exists('exif_read_data')) {
             return;
         }
 
         switch (strtolower(pathinfo($fileName, PATHINFO_EXTENSION))) {
-            case "jpeg":
-            case "jpg":
-                // Okay, I don't like suppressing warnings, but there are bugs in some PHP versions, and so I don't have much choice
-                // see https://stackoverflow.com/questions/37352371/php-exif-read-data-illegal-ifd-size
+            case 'jpeg':
+            case 'jpg':
                 $exif = @exif_read_data($fileName);
 
                 if (!$exif) {
@@ -77,11 +76,10 @@ class ThumbnailFactory
 
     /**
      * @param string $file
-     * @return resource|false
+     * @return \GdImage|false
      */
-    private function openImage($file)
+    private function openImage(string $file)
     {
-        // Get file extension
         $extension = strtolower(strrchr($file, '.'));
 
         switch ($extension) {
@@ -106,21 +104,19 @@ class ThumbnailFactory
                 break;
             default:
                 return false;
-                break;
         }
 
         return $img;
     }
 
     /**
-     * Create a smaller version of the image to use as a thumbnail
+     * Create a smaller version of the image to use as a thumbnail.
      *
      * @param int $newHeight
-     * @return void
+     * @param string $type
      */
-    public function resizeImage($newHeight, $type)
+    public function resizeImage(int $newHeight, string $type): void
     {
-        // double resolution for hdpi displays
         if (strpos($type, 'hdpi') !== false) {
             $newHeight *= 2;
         }
@@ -134,25 +130,25 @@ class ThumbnailFactory
 
     /**
      * @param int $newHeight
-     * @return void
+     * @return int
      */
-    private function calculateWidth($newHeight)
+    private function calculateWidth(int $newHeight): int
     {
-        $ratio = $this->getWidth() / $this->getHeight();
+        $ratio    = $this->getWidth() / $this->getHeight();
         $newWidth = $newHeight * $ratio;
-        return $newWidth;
+
+        return (int) round($newWidth);
     }
 
     /**
-     * Save image object as a file for future use. Optionally save as WebP as well.
+     * Save image object as a file for future use.
      *
      * @param string $savePath
-     * @param string $imageQuality
-     * @return void
+     * @param int $imageQuality
+     * @param string $type
      */
-    public function saveImage($savePath, $imageQuality, $type)
+    public function saveImage(string $savePath, int $imageQuality, string $type): void
     {
-        // Get file extension
         $extension = strrchr($savePath, '.');
         $extension = strtolower($extension);
 
@@ -167,18 +163,18 @@ class ThumbnailFactory
         imagedestroy($this->getImageResized());
 
         if (!$success) {
-            throw new Exception("Thumbnail image {$finalSavePath} couldn't be created. Check the original image file for problems.");
+            throw new \Exception("Thumbnail image {$finalSavePath} couldn't be created. Check the original image file for problems.");
         }
 
         clearstatcache();
 
         if (!file_exists($finalSavePath)) {
-            throw new Exception("Image {$finalSavePath} couldn't be saved. Check permissions on that directory.");
+            throw new \Exception("Image {$finalSavePath} couldn't be saved. Check permissions on that directory.");
         }
     }
 
     /**
-     * @return resource
+     * @return \GdImage|false
      */
     public function getImage()
     {
@@ -186,8 +182,8 @@ class ThumbnailFactory
     }
 
     /**
-     * @param resource $image
-     * @return  self
+     * @param \GdImage|false $image
+     * @return self
      */
     public function setImage($image)
     {
@@ -205,7 +201,7 @@ class ThumbnailFactory
 
     /**
      * @param int $width
-     * @return  self
+     * @return self
      */
     public function setWidth($width)
     {
@@ -223,7 +219,7 @@ class ThumbnailFactory
 
     /**
      * @param int $height
-     * @return  self
+     * @return self
      */
     public function setHeight($height)
     {
@@ -232,7 +228,7 @@ class ThumbnailFactory
     }
 
     /**
-     * @return resource
+     * @return \GdImage|false
      */
     public function getImageResized()
     {
@@ -240,8 +236,8 @@ class ThumbnailFactory
     }
 
     /**
-     * @param resource $imageResized
-     * @return  self
+     * @param \GdImage|false $imageResized
+     * @return self
      */
     public function setImageResized($imageResized)
     {

@@ -1,8 +1,10 @@
 <?php
 
+namespace RichCourt\Plugin\Content\RcGallery\Model;
+
 defined('_JEXEC') or die;
 
-class RCLabels
+class LabelsModel
 {
     /** @var array */
     private $labels = [];
@@ -11,7 +13,7 @@ class RCLabels
     private $labelsExist = false;
 
     /**
-     * Get image labels from user created file
+     * Get image labels from user created file.
      *
      * @param string $folderPath
      * @return bool|void
@@ -34,8 +36,8 @@ class RCLabels
 
             if (count($row_data) > 1) {
                 $fileName = $row_data[0];
-                $title = $row_data[1];
-                $label = [
+                $title    = $row_data[1];
+                $label    = [
                     'imageTitle' => $title,
                 ];
 
@@ -45,10 +47,10 @@ class RCLabels
     }
 
     /**
-     * Extract the image title from the file
+     * Extract the image title from the file.
      *
      * @param string $fileName
-     * @return void
+     * @return string|false
      */
     public function getTitle($fileName)
     {

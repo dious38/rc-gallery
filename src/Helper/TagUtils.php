@@ -1,11 +1,15 @@
 <?php
 
-class RCGalleryTagUtils
+namespace RichCourt\Plugin\Content\RcGallery\Helper;
+
+defined('_JEXEC') or die;
+
+class TagUtils
 {
     const GALLERY_TAG_REGEX = '/\{gallery.*?\}(.*?)\{\/gallery\}/is';
 
     /**
-     * Find all {gallery} tag matches
+     * Find all {gallery} tag matches.
      *
      * @param string $articleText
      * @return string[]|null (null if no matches found)
@@ -22,7 +26,7 @@ class RCGalleryTagUtils
         );
 
         if ($result === false) {
-            throw new RuntimeException('Error while finidng gallery tags');
+            throw new \RuntimeException('Error while finding gallery tags');
         }
 
         if ($result === 0) {

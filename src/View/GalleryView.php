@@ -1,15 +1,18 @@
 <?php
 
+namespace RichCourt\Plugin\Content\RcGallery\View;
+
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Document\Document;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\WebAsset\WebAssetManager;
 
 class GalleryView
 {
     /** @var string */
     private $html;
 
-    /** @var stdClass */
+    /** @var \stdClass */
     private $rcParams;
 
     /** @var int */
@@ -18,29 +21,27 @@ class GalleryView
     /** @var int */
     private $galleryNumber = 0;
 
-    /** @var Document */
-    private $doc;
+    /** @var WebAssetManager */
+    private $wa;
 
     /**
-     * Pass in params, and open the main containing div for the gallery
-     *
      * @param int $galleryNo
-     * @param array $rcParams
-     * @param Document $doc
-     * @param stdClass $rcParams
+     * @param \stdClass $rcParams
+     * @param WebAssetManager $wa
      */
-    public function __construct($galleryNo, stdClass $rcParams, $doc)
+    public function __construct(int $galleryNo, \stdClass $rcParams, WebAssetManager $wa)
     {
         $this->setRcParams($rcParams);
-
-        $this->setDoc($doc);
+        $this->setWa($wa);
         $this->galleryNumber = $galleryNo;
-        $galleryParams = ' data-rooturl="' . JURI::root() . '" data-startheight="' . $this->getRCParams()->minrowheight . '" data-marginsize="' . $this->getRCParams()->imagemargin . '"';
+
+        $galleryParams = ' data-rooturl="' . Uri::root() . '"'
+            . ' data-startheight="' . $this->getRCParams()->minrowheight . '"'
+            . ' data-marginsize="' . $this->getRCParams()->imagemargin . '"';
 
         $layout = $this->getRcParams()->layout === null
             ? ''
-            : $this->getRcParams()->layout
-        ;
+            : $this->getRcParams()->layout;
 
         $galleryClass = strtolower($layout);
 
@@ -49,7 +50,8 @@ class GalleryView
 
     /**
      * @param string $fullFileURL
-     * @param string $thumbFileURL
+     * @param string $directory
+     * @param string $fileName
      * @param int $height
      * @param int $width
      * @param bool $withLink
@@ -57,24 +59,21 @@ class GalleryView
      * @param array $thumbnailTypes
      * @param bool $thumbsExist
      */
-    public function addImage($fullFileURL, $directory, $fileName, $height, $width, $withLink, $imgTitle, array $thumbnailTypes, $thumbsExist)
+    public function addImage($fullFileURL, $directory, $fileName, $height, $width, $withLink, $imgTitle, array $thumbnailTypes, $thumbsExist): void
     {
-        require_once JPATH_SITE . '/plugins/content/rc_gallery/src/views/ThumbnailView.php';
-
         $images = [];
 
         foreach ($thumbnailTypes as $thumbnailType => $thumbnailTypeAttrributes) {
             $thumbExtension = (strpos($thumbnailType, 'webp') !== false)
                 ? '.webp'
-                : '.jpg'
-            ;
+                : '.jpg';
 
             $mainImgExtension = strrchr($fileName, '.');
             $mainImgExtension = strtolower($mainImgExtension);
 
             $thumbFileName = 'thumb_' . str_replace($mainImgExtension, $thumbExtension, $fileName);
 
-            $thumbnailTypeAttrributes['srcset'] = $directory . 'rc_thumbs/' . $thumbnailType . '/' . $thumbFileName . '';
+            $thumbnailTypeAttrributes['srcset'] = $directory . 'rc_thumbs/' . $thumbnailType . '/' . $thumbFileName;
             $images[$thumbnailType] = $thumbnailTypeAttrributes;
         }
 
@@ -96,46 +95,75 @@ class GalleryView
     }
 
     /**
-     * Add CSS and JS links to the document
+     * Add CSS and JS links via WebAssetManager.
      *
      * @param int $imageBorderRadius
      */
-    public function includeCSSandJS($imageBorderRadius)
+    public function includeCSSandJS($imageBorderRadius): void
     {
-        JHtml::_('jquery.framework');
+        $wa       = $this->getWa();
+        $mediaUrl = 'media/plg_content_rc_gallery/';
 
-        $jsPath = JURI::root() . 'plugins/content/rc_gallery/assets/js/rc_gallery.min.js?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/assets/js/rc_gallery.min.js');
+        // jQuery
+        $wa->useScript('jquery');
 
-        // @todo: should check whether the files exist, in case the setting's changed and then layouts is uninstalled
+        // Main gallery script
+        $wa->registerAndUseScript(
+            'plg_content_rc_gallery.gallery',
+            $mediaUrl . 'js/rc_gallery.min.js',
+            ['version' => 'auto'],
+            [],
+            ['jquery']
+        );
+
+        // Gallery CSS
+        $wa->registerAndUseStyle(
+            'plg_content_rc_gallery.gallery',
+            $mediaUrl . 'css/rc_gallery_layout.css',
+            ['version' => 'auto']
+        );
+
         if (!$this->getRCParams()->layout) {
-            $jsLayoutPath = JURI::root() . 'plugins/content/rc_gallery/assets/js/rc_gallery_layout.min.js?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/assets/js/rc_gallery_layout.min.js');
-            $cssPath = JURI::root() . 'plugins/content/rc_gallery/assets/css/rc_gallery_layout.css?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/assets/css/rc_gallery_layout.css');
+            // Default layout JS
+            $wa->registerAndUseScript(
+                'plg_content_rc_gallery.gallery_layout',
+                $mediaUrl . 'js/rc_gallery_layout.min.js',
+                ['version' => 'auto']
+            );
         } else {
-            $jsLayoutPath = JURI::root() . 'media/plg_rc_gallery_layouts/' . $this->getRcParams()->layout . '/rc_gallery_layout.min.js?' . filemtime(JPATH_ROOT . '/media/plg_rc_gallery_layouts/' . $this->getRcParams()->layout . '/rc_gallery_layout.min.js');
-            $cssPath = JURI::root() . 'media/plg_rc_gallery_layouts/' . $this->getRcParams()->layout . '/rc_gallery_layout.css?' . filemtime(JPATH_ROOT . '/media/plg_rc_gallery_layouts/' . $this->getRcParams()->layout . '/rc_gallery_layout.css');
-        }
+            // Custom layout from external layout media folder
+            $layoutName = $this->getRcParams()->layout;
 
-        $this->getDoc()->addScript($jsPath);
-        $this->getDoc()->addScript($jsLayoutPath);
-        $this->getDoc()->addStyleSheet($cssPath);
+            $wa->registerAndUseScript(
+                'plg_content_rc_gallery.layout_custom',
+                'media/plg_rc_gallery_layouts/' . $layoutName . '/rc_gallery_layout.min.js',
+                ['version' => 'auto']
+            );
+            $wa->registerAndUseStyle(
+                'plg_content_rc_gallery.layout_custom',
+                'media/plg_rc_gallery_layouts/' . $layoutName . '/rc_gallery_layout.css',
+                ['version' => 'auto']
+            );
+        }
     }
 
     /**
-     * Add an additional style tag to the document head, with cusotm parameters
+     * Add custom inline styles.
      */
-    public function includeCustomStyling()
+    public function includeCustomStyling(): void
     {
+        $wa = $this->getWa();
         $filterOption = $this->getRcParams()->thumbnailfilter;
 
         $whiteSpace = $this->getRcParams()->titletextoverflow == 'hidden'
             ? 'white-space: nowrap;'
-            : ''
-        ;
+            : '';
 
         $css = '
 			#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
 				background-color: ' . $this->getRcParams()->thumbbgcolour . ';
 				border-radius: ' . $this->getRcParams()->thumbnailradius . 'px;
+				margin: ' . $this->getRcParams()->imagemargin . 'px !important;
 			}
 
 			#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery div.rc_galleryimg_container span {
@@ -155,7 +183,7 @@ class GalleryView
 			}
 		';
 
-        if ($filterOption == 1) { // sepia
+        if ($filterOption == 1) {
             $css .= '
 				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
 					transition: -webkit-filter 0.28s ease, filter 0.28s ease;
@@ -169,7 +197,7 @@ class GalleryView
 			';
         }
 
-        if ($filterOption == 2) { // black and white
+        if ($filterOption == 2) {
             $css .= '
 				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
 					transition: -webkit-filter 0.28s ease, filter 0.28s ease;
@@ -196,84 +224,111 @@ class GalleryView
 			';
         }
 
-        $this->getDoc()->addStyleDeclaration($css);
+        $wa->addInlineStyle($css);
     }
 
     /**
-     * Add JS and CSS files for the legacy shadowbox
+     * Add JS and CSS for the legacy shadowbox.
      */
-    public function includeShadowbox()
+    public function includeShadowbox(): void
     {
-        $this->getDoc()->addScript(JURI::root() . 'plugins/content/rc_gallery/shadowbox/shadowbox.js?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/shadowbox/shadowbox.js'));
-        $this->getDoc()->addStyleSheet(JURI::root() . 'plugins/content/rc_gallery/shadowbox/shadowbox.css?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/shadowbox/shadowbox.css'));
+        $wa       = $this->getWa();
+        $mediaUrl = 'media/plg_content_rc_gallery/';
+
+        $wa->registerAndUseScript(
+            'plg_content_rc_gallery.shadowbox_legacy',
+            $mediaUrl . 'shadowbox/shadowbox.js',
+            ['version' => 'auto']
+        );
+        $wa->registerAndUseStyle(
+            'plg_content_rc_gallery.shadowbox_legacy',
+            $mediaUrl . 'shadowbox/shadowbox.css',
+            ['version' => 'auto']
+        );
     }
 
     /**
-     * Add JS and CSS files for the modern shadowbox
-     *
-     * @return void
+     * Add JS and CSS for the modern RC shadowbox.
      */
-    public function includeRCShadowbox()
+    public function includeRCShadowbox(): void
     {
+        $wa       = $this->getWa();
+        $mediaUrl = 'media/plg_content_rc_gallery/';
+
         $shadowboxParams = [
-            'image_folder' => JURI::root() . 'plugins/content/rc_gallery/rc_shadowbox/img/',
-            'title_option' => $this->getRCParams()->shadowboxtitle,
+            'image_folder'    => Uri::root() . $mediaUrl . 'rc_shadowbox/img/',
+            'title_option'    => $this->getRCParams()->shadowboxtitle,
             'hide_scroll_bar' => $this->getRCParams()->hidescrollbar,
         ];
 
-        $this->getDoc()->addScriptDeclaration(
+        $wa->addInlineScript(
             'var rc_sb_params = ' . json_encode($shadowboxParams) . ';'
         );
 
-        $shadowboxCssPath = JURI::root() . 'plugins/content/rc_gallery/rc_shadowbox/css/' . $this->getRcParams()->shadowboxanimations . '.css?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/rc_shadowbox/css/' . $this->getRcParams()->shadowboxanimations . '.css');
+        $wa->registerAndUseScript(
+            'plg_content_rc_gallery.rc_shadowbox_swipe',
+            $mediaUrl . 'rc_shadowbox/jquery.mobile.custom.min.js',
+            ['version' => 'auto'],
+            [],
+            ['jquery']
+        );
+        $wa->registerAndUseScript(
+            'plg_content_rc_gallery.rc_shadowbox',
+            $mediaUrl . 'rc_shadowbox/rc_shadowbox.min.js',
+            ['version' => 'auto'],
+            [],
+            ['jquery']
+        );
 
-        $this->getDoc()->addScript(JURI::root() . 'plugins/content/rc_gallery/rc_shadowbox/jquery.mobile.custom.min.js?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/rc_shadowbox/jquery.mobile.custom.min.js'));
-        $this->getDoc()->addScript(JURI::root() . 'plugins/content/rc_gallery/rc_shadowbox/rc_shadowbox.min.js?' . filemtime(JPATH_ROOT . '/plugins/content/rc_gallery/rc_shadowbox/rc_shadowbox.min.js'));
-        $this->getDoc()->addStyleSheet($shadowboxCssPath);
+        // Animation CSS loaded dynamically based on user parameter
+        $animationName = $this->getRcParams()->shadowboxanimations;
+        $wa->registerAndUseStyle(
+            'plg_content_rc_gallery.rc_shadowbox_animation',
+            $mediaUrl . 'rc_shadowbox/css/' . $animationName . '.css',
+            ['version' => 'auto']
+        );
     }
 
     /**
-     * Build error message html
+     * Build error message html.
      *
      * @param string $errorReason
      * @param string $tagcontent
      * @param string $rootFolder
-     * @return void
      */
-    public function errorReport($errorReason, $tagcontent, $rootFolder)
+    public function errorReport(string $errorReason, string $tagcontent, string $rootFolder): void
     {
-        //Forget everything else, and replace it with the error message
         $this->html = '<div class="rc_gallery_error">';
         $this->html .= '<h3>' . $errorReason . '</h3>';
-        $this->html .= '<p>Looked for images in: "' .  $tagcontent .  '"</p> <p>Under your root image folder: "' . $rootFolder . '"</p>';
+        $this->html .= '<p>Looked for images in: "' . $tagcontent . '"</p> <p>Under your root image folder: "' . $rootFolder . '"</p>';
         $this->html .= '</div>';
     }
 
     /**
-     * Closes and returns the HTML built in his object
+     * Closes and returns the HTML.
      *
-     * @return void
+     * @return string
      */
-    public function getHTML()
+    public function getHTML(): string
     {
-        //close off the open html tags, and return the lot
         $this->html .= '</div>';
+
         return $this->html;
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
-    public function getRcParams()
+    public function getRcParams(): \stdClass
     {
         return $this->rcParams;
     }
 
     /**
-     * @param stdClass $rcParams
-     * @return  self
+     * @param \stdClass $rcParams
+     * @return self
      */
-    public function setRcParams(stdClass $rcParams)
+    public function setRcParams(\stdClass $rcParams): self
     {
         $this->rcParams = $rcParams;
 
@@ -283,16 +338,16 @@ class GalleryView
     /**
      * @return int
      */
-    public function getGalleryNumber()
+    public function getGalleryNumber(): int
     {
         return $this->galleryNumber;
     }
 
     /**
      * @param int $galleryNumber
-     * @return  self
+     * @return self
      */
-    public function setGalleryNumber($galleryNumber)
+    public function setGalleryNumber(int $galleryNumber): self
     {
         $this->galleryNumber = $galleryNumber;
 
@@ -302,7 +357,7 @@ class GalleryView
     /**
      * @return int
      */
-    public function getImageNumber()
+    public function getImageNumber(): int
     {
         return $this->imageNumber;
     }
@@ -311,7 +366,7 @@ class GalleryView
      * @param int $imageNumber
      * @return self
      */
-    public function setImageNumber($imageNumber)
+    public function setImageNumber(int $imageNumber): self
     {
         $this->imageNumber = $imageNumber;
 
@@ -319,20 +374,20 @@ class GalleryView
     }
 
     /**
-     * @return Document
+     * @return WebAssetManager
      */
-    public function getDoc()
+    public function getWa(): WebAssetManager
     {
-        return $this->doc;
+        return $this->wa;
     }
 
     /**
-     * @param Document $doc
+     * @param WebAssetManager $wa
      * @return self
      */
-    public function setDoc(Document $doc)
+    public function setWa(WebAssetManager $wa): self
     {
-        $this->doc = $doc;
+        $this->wa = $wa;
 
         return $this;
     }

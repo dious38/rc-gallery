@@ -1,10 +1,12 @@
 <?php
 
+namespace RichCourt\Plugin\Content\RcGallery\Helper;
+
 defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
-class Params
+class ParamsHelper
 {
     /** @var Registry */
     private $pluginParams;
@@ -18,12 +20,12 @@ class Params
     /** @var array */
     private $defaultValues;
 
-    /** @var stdClass */
+    /** @var \stdClass */
     private $params;
 
     /**
      * @param Registry $pluginParams
-     * @param array $overridePluginParams
+     * @param string $galleryTagString
      */
     public function __construct(Registry $pluginParams, $galleryTagString = '')
     {
@@ -95,9 +97,9 @@ class Params
     }
 
     /**
-     * Puts params into a simple keyed array, overriding any params that are set in overrideParams
+     * Puts params into a simple keyed array, overriding any params that are set in overrideParams.
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function combineParams()
     {
@@ -117,19 +119,27 @@ class Params
     }
 
     /**
-     * @param string $inlineParams
+     * @param string $galleryTag
      * @return array
      */
     private function assessOverrideParams($galleryTag)
     {
-        // get inline params from the opening gallery tag
+        // Normalize quotes: Joomla 6 editors convert straight quotes to
+        // Unicode curly quotes and/or HTML entities. Replace them all with ASCII quotes.
+        $galleryTag = html_entity_decode($galleryTag, ENT_QUOTES, 'UTF-8');
+        $galleryTag = str_replace(
+            ["\u{201C}", "\u{201D}", "\u{2018}", "\u{2019}", "\u{00AB}", "\u{00BB}"],
+            ['"', '"', "'", "'", '"', '"'],
+            $galleryTag
+        );
+
         $tagContent = preg_replace("/{.+?}/", "", $galleryTag);
         $inlineParamsString = str_replace('{gallery ', '', $galleryTag);
         $inlineParamsString = str_replace('{/gallery}', '', $inlineParamsString);
-        $inlineParamsString = str_replace('}' . $tagContent, '', $inlineParamsString); // will end up as '{gallery' if there were no inline params
+        $inlineParamsString = str_replace('}' . $tagContent, '', $inlineParamsString);
 
         if ($inlineParamsString == '{gallery') {
-            return []; // there aren't any inline params, so just leave it alone
+            return [];
         }
 
         $inlineParamsArray = explode(' ', $inlineParamsString);
@@ -137,10 +147,10 @@ class Params
         $overrideParams = [];
 
         foreach ($inlineParamsArray as $inlineParam) {
-            $key =  substr($inlineParam, 0, strpos($inlineParam, '='));
+            $key   = substr($inlineParam, 0, strpos($inlineParam, '='));
             $value = str_replace('"', '', substr($inlineParam, strpos($inlineParam, '=') + 1, strlen($inlineParam) - strpos($inlineParam, '=')));
             $overrideParams[$key] = $value;
-        };
+        }
 
         return $overrideParams;
     }
@@ -154,7 +164,7 @@ class Params
     }
 
     /**
-     * @param array $overridePluginParams
+     * @param array $overrideParams
      * @return self
      */
     public function setOverrideParams(array $overrideParams)
@@ -172,8 +182,8 @@ class Params
     }
 
     /**
-     * @var Registry $pluginParams
-     * @return  self
+     * @param Registry $pluginParams
+     * @return self
      */
     public function setPluginParams(Registry $pluginParams)
     {
@@ -191,7 +201,7 @@ class Params
 
     /**
      * @param array $paramsMap
-     * @return  self
+     * @return self
      */
     public function setParamsMap(array $paramsMap)
     {
@@ -209,7 +219,7 @@ class Params
 
     /**
      * @param array $defaultValues
-     * @return  self
+     * @return self
      */
     public function setDefaultValues(array $defaultValues)
     {
@@ -218,7 +228,7 @@ class Params
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
     public function getParams()
     {
@@ -226,10 +236,10 @@ class Params
     }
 
     /**
-     * @param stdClass $params
+     * @param \stdClass $params
      * @return self
      */
-    public function setParams(stdClass $params)
+    public function setParams(\stdClass $params)
     {
         $this->params = $params;
         return $this;
