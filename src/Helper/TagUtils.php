@@ -4,6 +4,8 @@ namespace RichCourt\Plugin\Content\RcGallery\Helper;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
+
 class TagUtils
 {
     const GALLERY_TAG_REGEX = '/\{gallery.*?\}(.*?)\{\/gallery\}/is';
@@ -26,7 +28,7 @@ class TagUtils
         );
 
         if ($result === false) {
-            throw new \RuntimeException('Error while finding gallery tags');
+            throw new \RuntimeException(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_FINDING_TAGS'));
         }
 
         if ($result === 0) {

@@ -5,6 +5,7 @@ namespace RichCourt\Plugin\Content\RcGallery\Extension;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Event\Content\ContentPrepareEvent;
+use Joomla\CMS\Language\Text;
 use Joomla\Filesystem\Folder;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
@@ -207,7 +208,7 @@ class RcGallery extends CMSPlugin implements SubscriberInterface
         $absolutePath  = JPATH_ROOT . '/' . $directoryPath;
 
         if (!file_exists($absolutePath)) {
-            $galleryView->errorReport('Image folder not found.', $tagContent, $this->getRCParams()->galleryfolder);
+            $galleryView->errorReport(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_FOLDER_NOT_FOUND'), $tagContent, $this->getRCParams()->galleryfolder);
             return $galleryView->getHTML();
         }
 
@@ -233,7 +234,7 @@ class RcGallery extends CMSPlugin implements SubscriberInterface
         }
 
         if (!$files) {
-            $galleryView->errorReport('No images found in specified folder.', $tagContent, $this->getRCParams()->galleryfolder);
+            $galleryView->errorReport(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_NO_IMAGES'), $tagContent, $this->getRCParams()->galleryfolder);
             return $galleryView->getHTML();
         }
 

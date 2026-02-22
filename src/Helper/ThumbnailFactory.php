@@ -4,6 +4,8 @@ namespace RichCourt\Plugin\Content\RcGallery\Helper;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
+
 class ThumbnailFactory
 {
     /** @var \GdImage|false */
@@ -163,13 +165,13 @@ class ThumbnailFactory
         imagedestroy($this->getImageResized());
 
         if (!$success) {
-            throw new \Exception("Thumbnail image {$finalSavePath} couldn't be created. Check the original image file for problems.");
+            throw new \Exception(Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_THUMBNAIL_CREATE', $finalSavePath));
         }
 
         clearstatcache();
 
         if (!file_exists($finalSavePath)) {
-            throw new \Exception("Image {$finalSavePath} couldn't be saved. Check permissions on that directory.");
+            throw new \Exception(Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_THUMBNAIL_SAVE', $finalSavePath));
         }
     }
 

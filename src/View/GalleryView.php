@@ -4,6 +4,7 @@ namespace RichCourt\Plugin\Content\RcGallery\View;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 
@@ -300,7 +301,8 @@ class GalleryView
     {
         $this->html = '<div class="rc_gallery_error">';
         $this->html .= '<h3>' . $errorReason . '</h3>';
-        $this->html .= '<p>Looked for images in: "' . $tagcontent . '"</p> <p>Under your root image folder: "' . $rootFolder . '"</p>';
+        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_LOOKED_FOR', $tagcontent) . '</p>';
+        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_UNDER_ROOT_FOLDER', $rootFolder) . '</p>';
         $this->html .= '</div>';
     }
 
