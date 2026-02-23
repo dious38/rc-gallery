@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>therichcourt@gmail.com</authorEmail>
     <authorUrl>www.therichcourt.com</authorUrl>
-    <version>5.0.0</version>
+    <version>5.0.1</version>
     <description>PLG_CONTENT_RC_GALLERY_DESCRIPTION</description>
 
     <namespace path="src">RichCourt\Plugin\Content\RcGallery</namespace>
@@ -119,9 +119,9 @@
                         <option value="normal">PLG_CONTENT_RC_GALLERY_TITLETEXTWEIGHT_OPT_NORMAL</option>
                 </field>
                 <field name="titletextalign" type="radio" default="left" description="PLG_CONTENT_RC_GALLERY_TITLETEXTALIGN_DESC" label="PLG_CONTENT_RC_GALLERY_TITLETEXTALIGN_LABEL">
-                        <option value="left">PLG_CONTENT_RC_GALLERY_TITLETEXTALIGN_OPT_LEFT</option>
-                        <option value="center">PLG_CONTENT_RC_GALLERY_TITLETEXTALIGN_OPT_CENTRE</option>
-                        <option value="right">PLG_CONTENT_RC_GALLERY_TITLETEXTALIGN_OPT_RIGHT</option>
+                        <option value="left">JGLOBAL_LEFT</option>
+                        <option value="center">JGLOBAL_CENTER</option>
+                        <option value="right">JGLOBAL_RIGHT</option>
                 </field>
                 <field name="titletextoverflow" type="radio" default="hidden" description="PLG_CONTENT_RC_GALLERY_TITLETEXTOVERFLOW_DESC" label="PLG_CONTENT_RC_GALLERY_TITLETEXTOVERFLOW_LABEL">
                         <option value="hidden">PLG_CONTENT_RC_GALLERY_TITLETEXTOVERFLOW_OPT_HIDDEN</option>

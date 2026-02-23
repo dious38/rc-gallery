@@ -19,8 +19,8 @@ var RCGallery = function () {
 
                 var imgUrl = imageContainer.parentElement.href,
                     xhr = new XMLHttpRequest(),
-                    startHeight = imageContainer.parentElement.parentElement.dataset.startHeight,
-                    rootUrl = imageContainer.parentElement.parentElement.dataset.rootUrl,
+                    startHeight = imageContainer.parentElement.parentElement.dataset.startheight,
+                    rootUrl = imageContainer.parentElement.parentElement.dataset.rooturl,
                     requestUrl = rootUrl + "?option=com_ajax",
                     postData = "group=content&plugin=MakeThumbs&format=json&tmpl=component&img=" + imgUrl + "&start_height=" + startHeight;
 

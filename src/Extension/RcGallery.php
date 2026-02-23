@@ -21,6 +21,8 @@ use RichCourt\Plugin\Content\RcGallery\View\GalleryView;
 
 class RcGallery extends CMSPlugin implements SubscriberInterface
 {
+    protected $autoloadLanguage = true;
+
     const GALLERY_TAG = 'gallery';
 
     /** @var int */
@@ -102,7 +104,7 @@ class RcGallery extends CMSPlugin implements SubscriberInterface
     {
         $app     = $this->getApplication();
         $input   = $app->getInput();
-        $imgPath = JPATH_SITE . str_replace(Uri::root(), '', $input->post->getString('img', ''));
+        $imgPath = JPATH_SITE . '/' . str_replace(Uri::root(), '', $input->post->getString('img', ''));
 
         $this->gatherParams();
 
