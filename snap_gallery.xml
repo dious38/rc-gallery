@@ -20,10 +20,15 @@
 
     <languages>
         <language tag="en-GB">language/en-GB/plg_content_snap_gallery.ini</language>
+        <language tag="en-GB">language/en-GB/plg_content_snap_gallery.sys.ini</language>
         <language tag="fr-FR">language/fr-FR/plg_content_snap_gallery.ini</language>
+        <language tag="fr-FR">language/fr-FR/plg_content_snap_gallery.sys.ini</language>
         <language tag="de-DE">language/de-DE/plg_content_snap_gallery.ini</language>
+        <language tag="de-DE">language/de-DE/plg_content_snap_gallery.sys.ini</language>
         <language tag="es-ES">language/es-ES/plg_content_snap_gallery.ini</language>
+        <language tag="es-ES">language/es-ES/plg_content_snap_gallery.sys.ini</language>
         <language tag="it-IT">language/it-IT/plg_content_snap_gallery.ini</language>
+        <language tag="it-IT">language/it-IT/plg_content_snap_gallery.sys.ini</language>
     </languages>
 
     <media destination="plg_content_snap_gallery" folder="media">
@@ -143,13 +148,11 @@
                 <field name="overlayopacity" label="PLG_CONTENT_SNAP_GALLERY_OVERLAYOPACITY_LABEL" type="range" default="1" min="0" max="1" step="0.05" size="3" description="PLG_CONTENT_SNAP_GALLERY_OVERLAYOPACITY_DESC"/>
                 <field name="overlayblur" label="PLG_CONTENT_SNAP_GALLERY_OVERLAYBLUR_LABEL" type="number" default="0" description="PLG_CONTENT_SNAP_GALLERY_OVERLAYBLUR_DESC"/>
             </fieldset>
-            <fieldset name="addons" label="PLG_CONTENT_SNAP_GALLERY_FIELDSET_ADDONS">
-                <field name="addonslink" type="note" label="PLG_CONTENT_SNAP_GALLERY_ADDONSLINK_LABEL" description="PLG_CONTENT_SNAP_GALLERY_ADDONSLINK_DESC"/>
-            </fieldset>
             <fieldset name="about" label="PLG_CONTENT_SNAP_GALLERY_FIELDSET_ABOUT">
-                <field type="note" label="PLG_CONTENT_SNAP_GALLERY_ABOUT_LABEL"/>
-                <field type="note" label="PLG_CONTENT_SNAP_GALLERY_USERGUIDE_LABEL" description="PLG_CONTENT_SNAP_GALLERY_USERGUIDE_DESC"/>
+                <field type="note" label="PLG_CONTENT_SNAP_GALLERY_ABOUT_LABEL" description="PLG_CONTENT_SNAP_GALLERY_ABOUT_DESC"/>
+                <field type="note" label="PLG_CONTENT_SNAP_GALLERY_DOCUMENTATION_LABEL" description="PLG_CONTENT_SNAP_GALLERY_DOCUMENTATION_DESC"/>
                 <field type="note" label="PLG_CONTENT_SNAP_GALLERY_SUPPORT_LABEL" description="PLG_CONTENT_SNAP_GALLERY_SUPPORT_DESC"/>
+                <field type="note" label="PLG_CONTENT_SNAP_GALLERY_CREDITS_LABEL" description="PLG_CONTENT_SNAP_GALLERY_CREDITS_DESC"/>
             </fieldset>
             <fieldset name="advanced" label="PLG_CONTENT_SNAP_GALLERY_FIELDSET_ADVANCED">
                 <field type="note" label="PLG_CONTENT_SNAP_GALLERY_ADVANCED_NOTE_LABEL" description="PLG_CONTENT_SNAP_GALLERY_ADVANCED_NOTE_DESC"/>
