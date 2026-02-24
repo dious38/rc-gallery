@@ -8,7 +8,7 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Event\DispatcherInterface;
-use RichCourt\Plugin\Content\RcGallery\Extension\RcGallery;
+use RichCourt\Plugin\Content\SnapGallery\Extension\SnapGallery;
 
 return new class () implements ServiceProviderInterface {
     public function register(Container $container): void
@@ -17,9 +17,9 @@ return new class () implements ServiceProviderInterface {
             PluginInterface::class,
             function (Container $container) {
                 $dispatcher = $container->get(DispatcherInterface::class);
-                $plugin     = new RcGallery(
+                $plugin     = new SnapGallery(
                     $dispatcher,
-                    (array) PluginHelper::getPlugin('content', 'rc_gallery')
+                    (array) PluginHelper::getPlugin('content', 'snap_gallery')
                 );
                 $plugin->setApplication(Factory::getApplication());
 

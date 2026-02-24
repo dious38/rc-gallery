@@ -1,5 +1,5 @@
 {
-    "name": "therichcourt/rc_gallery",
+    "name": "dious38/snap_gallery",
     "description": "An extremely easy to use gallery plugin for Joomla, built around a beautiful and modern responsive design.",
     "type": "project",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "TheRichCourt\\RCGallery\\": "src/"
+        "Dious38\\SnapGallery\\": "src/"
     },
     "require": {},
     "require-dev": {

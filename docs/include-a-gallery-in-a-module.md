@@ -15,7 +15,7 @@ The module add-on allows you to place galleries inside Joomla module positions (
 
 1. Install the module add-on (see [Module add-on](add-ons/module-add-on.md))
 2. Go to **Content > Site Modules > New**
-3. Select the RC Gallery module type
+3. Select the Snap Gallery module type
 4. Choose the image folder for your gallery
 5. Assign the module to a position and the pages where it should appear
 6. Save

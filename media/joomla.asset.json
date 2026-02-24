@@ -1,56 +1,56 @@
 {
     "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
-    "name": "plg_content_rc_gallery",
-    "version": "5.0.0",
-    "description": "RC Gallery web assets",
+    "name": "plg_content_snap_gallery",
+    "version": "6.0.0",
+    "description": "Snap Gallery web assets",
     "license": "GPL-2.0-or-later",
     "assets": [
         {
-            "name": "plg_content_rc_gallery.gallery",
+            "name": "plg_content_snap_gallery.gallery",
             "type": "style",
-            "uri": "plg_content_rc_gallery/css/rc_gallery_layout.css",
+            "uri": "plg_content_snap_gallery/css/snap_gallery_layout.css",
             "version": "auto"
         },
         {
-            "name": "plg_content_rc_gallery.gallery",
+            "name": "plg_content_snap_gallery.gallery",
             "type": "script",
-            "uri": "plg_content_rc_gallery/js/rc_gallery.min.js",
+            "uri": "plg_content_snap_gallery/js/snap_gallery.min.js",
             "version": "auto",
             "dependencies": [
                 "jquery"
             ]
         },
         {
-            "name": "plg_content_rc_gallery.gallery_layout",
+            "name": "plg_content_snap_gallery.gallery_layout",
             "type": "script",
-            "uri": "plg_content_rc_gallery/js/rc_gallery_layout.min.js",
+            "uri": "plg_content_snap_gallery/js/snap_gallery_layout.min.js",
             "version": "auto"
         },
         {
-            "name": "plg_content_rc_gallery.shadowbox_legacy",
+            "name": "plg_content_snap_gallery.shadowbox_legacy",
             "type": "script",
-            "uri": "plg_content_rc_gallery/shadowbox/shadowbox.js",
+            "uri": "plg_content_snap_gallery/shadowbox/shadowbox.js",
             "version": "auto"
         },
         {
-            "name": "plg_content_rc_gallery.shadowbox_legacy",
+            "name": "plg_content_snap_gallery.shadowbox_legacy",
             "type": "style",
-            "uri": "plg_content_rc_gallery/shadowbox/shadowbox.css",
+            "uri": "plg_content_snap_gallery/shadowbox/shadowbox.css",
             "version": "auto"
         },
         {
-            "name": "plg_content_rc_gallery.rc_shadowbox",
+            "name": "plg_content_snap_gallery.rc_shadowbox",
             "type": "script",
-            "uri": "plg_content_rc_gallery/rc_shadowbox/rc_shadowbox.min.js",
+            "uri": "plg_content_snap_gallery/rc_shadowbox/rc_shadowbox.min.js",
             "version": "auto",
             "dependencies": [
                 "jquery"
             ]
         },
         {
-            "name": "plg_content_rc_gallery.rc_shadowbox_swipe",
+            "name": "plg_content_snap_gallery.rc_shadowbox_swipe",
             "type": "script",
-            "uri": "plg_content_rc_gallery/rc_shadowbox/jquery.mobile.custom.min.js",
+            "uri": "plg_content_snap_gallery/rc_shadowbox/jquery.mobile.custom.min.js",
             "version": "auto",
             "dependencies": [
                 "jquery"

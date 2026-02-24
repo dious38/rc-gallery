@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\Helper;
+namespace RichCourt\Plugin\Content\SnapGallery\Helper;
 
 defined('_JEXEC') or die;
 

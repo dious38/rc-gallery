@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\Extension;
+namespace RichCourt\Plugin\Content\SnapGallery\Extension;
 
 defined('_JEXEC') or die;
 
@@ -13,13 +13,13 @@ use Joomla\Event\DispatcherInterface;
 use Joomla\Event\Event;
 use Joomla\Event\SubscriberInterface;
 use Joomla\Registry\Registry;
-use RichCourt\Plugin\Content\RcGallery\Helper\ParamsHelper;
-use RichCourt\Plugin\Content\RcGallery\Helper\TagUtils;
-use RichCourt\Plugin\Content\RcGallery\Helper\ThumbnailFactory;
-use RichCourt\Plugin\Content\RcGallery\Model\LabelsModel;
-use RichCourt\Plugin\Content\RcGallery\View\GalleryView;
+use RichCourt\Plugin\Content\SnapGallery\Helper\ParamsHelper;
+use RichCourt\Plugin\Content\SnapGallery\Helper\TagUtils;
+use RichCourt\Plugin\Content\SnapGallery\Helper\ThumbnailFactory;
+use RichCourt\Plugin\Content\SnapGallery\Model\LabelsModel;
+use RichCourt\Plugin\Content\SnapGallery\View\GalleryView;
 
-class RcGallery extends CMSPlugin implements SubscriberInterface
+class SnapGallery extends CMSPlugin implements SubscriberInterface
 {
     protected $autoloadLanguage = true;
 
@@ -210,7 +210,7 @@ class RcGallery extends CMSPlugin implements SubscriberInterface
         $absolutePath  = JPATH_ROOT . '/' . $directoryPath;
 
         if (!file_exists($absolutePath)) {
-            $galleryView->errorReport(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_FOLDER_NOT_FOUND'), $tagContent, $this->getRCParams()->galleryfolder);
+            $galleryView->errorReport(Text::_('PLG_CONTENT_SNAP_GALLERY_ERROR_FOLDER_NOT_FOUND'), $tagContent, $this->getRCParams()->galleryfolder);
             return $galleryView->getHTML();
         }
 
@@ -236,7 +236,7 @@ class RcGallery extends CMSPlugin implements SubscriberInterface
         }
 
         if (!$files) {
-            $galleryView->errorReport(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_NO_IMAGES'), $tagContent, $this->getRCParams()->galleryfolder);
+            $galleryView->errorReport(Text::_('PLG_CONTENT_SNAP_GALLERY_ERROR_NO_IMAGES'), $tagContent, $this->getRCParams()->galleryfolder);
             return $galleryView->getHTML();
         }
 

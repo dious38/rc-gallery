@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\Helper;
+namespace RichCourt\Plugin\Content\SnapGallery\Helper;
 
 defined('_JEXEC') or die;
 
@@ -28,7 +28,7 @@ class TagUtils
         );
 
         if ($result === false) {
-            throw new \RuntimeException(Text::_('PLG_CONTENT_RC_GALLERY_ERROR_FINDING_TAGS'));
+            throw new \RuntimeException(Text::_('PLG_CONTENT_SNAP_GALLERY_ERROR_FINDING_TAGS'));
         }
 
         if ($result === 0) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\View;
+namespace RichCourt\Plugin\Content\SnapGallery\View;
 
 defined('_JEXEC') or die;
 
@@ -46,7 +46,7 @@ class GalleryView
 
         $galleryClass = strtolower($layout);
 
-        $this->html = '<div id="rc_gallery_' . $this->getGalleryNumber() . '" class="rc_gallery rc_' . $galleryClass . '" ' . $galleryParams . '>';
+        $this->html = '<div id="snap_gallery_' . $this->getGalleryNumber() . '" class="snap_gallery rc_' . $galleryClass . '" ' . $galleryParams . '>';
     }
 
     /**
@@ -103,15 +103,15 @@ class GalleryView
     public function includeCSSandJS($imageBorderRadius): void
     {
         $wa       = $this->getWa();
-        $mediaUrl = 'media/plg_content_rc_gallery/';
+        $mediaUrl = 'media/plg_content_snap_gallery/';
 
         // jQuery
         $wa->useScript('jquery');
 
         // Main gallery script
         $wa->registerAndUseScript(
-            'plg_content_rc_gallery.gallery',
-            $mediaUrl . 'js/rc_gallery.min.js',
+            'plg_content_snap_gallery.gallery',
+            $mediaUrl . 'js/snap_gallery.min.js',
             ['version' => 'auto'],
             [],
             ['jquery']
@@ -119,16 +119,16 @@ class GalleryView
 
         // Gallery CSS
         $wa->registerAndUseStyle(
-            'plg_content_rc_gallery.gallery',
-            $mediaUrl . 'css/rc_gallery_layout.css',
+            'plg_content_snap_gallery.gallery',
+            $mediaUrl . 'css/snap_gallery_layout.css',
             ['version' => 'auto']
         );
 
         if (!$this->getRCParams()->layout) {
             // Default layout JS
             $wa->registerAndUseScript(
-                'plg_content_rc_gallery.gallery_layout',
-                $mediaUrl . 'js/rc_gallery_layout.min.js',
+                'plg_content_snap_gallery.gallery_layout',
+                $mediaUrl . 'js/snap_gallery_layout.min.js',
                 ['version' => 'auto']
             );
         } else {
@@ -136,13 +136,13 @@ class GalleryView
             $layoutName = $this->getRcParams()->layout;
 
             $wa->registerAndUseScript(
-                'plg_content_rc_gallery.layout_custom',
-                'media/plg_rc_gallery_layouts/' . $layoutName . '/rc_gallery_layout.min.js',
+                'plg_content_snap_gallery.layout_custom',
+                'media/plg_rc_gallery_layouts/' . $layoutName . '/snap_gallery_layout.min.js',
                 ['version' => 'auto']
             );
             $wa->registerAndUseStyle(
-                'plg_content_rc_gallery.layout_custom',
-                'media/plg_rc_gallery_layouts/' . $layoutName . '/rc_gallery_layout.css',
+                'plg_content_snap_gallery.layout_custom',
+                'media/plg_rc_gallery_layouts/' . $layoutName . '/snap_gallery_layout.css',
                 ['version' => 'auto']
             );
         }
@@ -161,13 +161,13 @@ class GalleryView
             : '';
 
         $css = '
-			#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
+			#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery .snap_galleryimg {
 				background-color: ' . $this->getRcParams()->thumbbgcolour . ';
 				border-radius: ' . $this->getRcParams()->thumbnailradius . 'px;
 				margin: ' . $this->getRcParams()->imagemargin . 'px !important;
 			}
 
-			#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery div.rc_galleryimg_container span {
+			#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery div.snap_galleryimg_container span {
 				color: ' . $this->getRcParams()->titletextcolour . ';
 				font-size: ' . $this->getRcParams()->titletextsize . 'px;
 				line-height: ' . ($this->getRcParams()->titletextsize + 6) . 'px;
@@ -186,13 +186,13 @@ class GalleryView
 
         if ($filterOption == 1) {
             $css .= '
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery .snap_galleryimg {
 					transition: -webkit-filter 0.28s ease, filter 0.28s ease;
 					filter: sepia(80%);
 					-webkit-filter: sepia(80%);
 				}
 
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery div.rc_galleryimg_container:hover .rc_galleryimg {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery div.snap_galleryimg_container:hover .snap_galleryimg {
 					filter: sepia(0%);
 				}
 			';
@@ -200,13 +200,13 @@ class GalleryView
 
         if ($filterOption == 2) {
             $css .= '
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery .snap_galleryimg {
 					transition: -webkit-filter 0.28s ease, filter 0.28s ease;
 					filter: grayscale(100%);
 					-webkit-filter: grayscale(100%);
 				}
 
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery .rc_galleryimg:hover {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery .snap_galleryimg:hover {
 					filter: grayscale(0%);
 					-webkit-filter: grayscale(0%);
 				}
@@ -215,11 +215,11 @@ class GalleryView
 
         if ($this->getRcParams()->imageTitle == 1) {
             $css .= '
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery div.rc_galleryimg_container span {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery div.snap_galleryimg_container span {
 					opacity: 0;
 				}
 
-				#rc_gallery_' . $this->getGalleryNumber() . '.rc_gallery div.rc_galleryimg_container:hover span {
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery div.snap_galleryimg_container:hover span {
 					opacity: 1;
 				}
 			';
@@ -234,15 +234,15 @@ class GalleryView
     public function includeShadowbox(): void
     {
         $wa       = $this->getWa();
-        $mediaUrl = 'media/plg_content_rc_gallery/';
+        $mediaUrl = 'media/plg_content_snap_gallery/';
 
         $wa->registerAndUseScript(
-            'plg_content_rc_gallery.shadowbox_legacy',
+            'plg_content_snap_gallery.shadowbox_legacy',
             $mediaUrl . 'shadowbox/shadowbox.js',
             ['version' => 'auto']
         );
         $wa->registerAndUseStyle(
-            'plg_content_rc_gallery.shadowbox_legacy',
+            'plg_content_snap_gallery.shadowbox_legacy',
             $mediaUrl . 'shadowbox/shadowbox.css',
             ['version' => 'auto']
         );
@@ -254,7 +254,7 @@ class GalleryView
     public function includeRCShadowbox(): void
     {
         $wa       = $this->getWa();
-        $mediaUrl = 'media/plg_content_rc_gallery/';
+        $mediaUrl = 'media/plg_content_snap_gallery/';
 
         $shadowboxParams = [
             'image_folder'    => Uri::root() . $mediaUrl . 'rc_shadowbox/img/',
@@ -267,14 +267,14 @@ class GalleryView
         );
 
         $wa->registerAndUseScript(
-            'plg_content_rc_gallery.rc_shadowbox_swipe',
+            'plg_content_snap_gallery.rc_shadowbox_swipe',
             $mediaUrl . 'rc_shadowbox/jquery.mobile.custom.min.js',
             ['version' => 'auto'],
             [],
             ['jquery']
         );
         $wa->registerAndUseScript(
-            'plg_content_rc_gallery.rc_shadowbox',
+            'plg_content_snap_gallery.rc_shadowbox',
             $mediaUrl . 'rc_shadowbox/rc_shadowbox.min.js',
             ['version' => 'auto'],
             [],
@@ -284,7 +284,7 @@ class GalleryView
         // Animation CSS loaded dynamically based on user parameter
         $animationName = $this->getRcParams()->shadowboxanimations;
         $wa->registerAndUseStyle(
-            'plg_content_rc_gallery.rc_shadowbox_animation',
+            'plg_content_snap_gallery.rc_shadowbox_animation',
             $mediaUrl . 'rc_shadowbox/css/' . $animationName . '.css',
             ['version' => 'auto']
         );
@@ -299,10 +299,10 @@ class GalleryView
      */
     public function errorReport(string $errorReason, string $tagcontent, string $rootFolder): void
     {
-        $this->html = '<div class="rc_gallery_error">';
+        $this->html = '<div class="snap_gallery_error">';
         $this->html .= '<h3>' . $errorReason . '</h3>';
-        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_LOOKED_FOR', $tagcontent) . '</p>';
-        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_UNDER_ROOT_FOLDER', $rootFolder) . '</p>';
+        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_SNAP_GALLERY_ERROR_LOOKED_FOR', $tagcontent) . '</p>';
+        $this->html .= '<p>' . Text::sprintf('PLG_CONTENT_SNAP_GALLERY_ERROR_UNDER_ROOT_FOLDER', $rootFolder) . '</p>';
         $this->html .= '</div>';
     }
 

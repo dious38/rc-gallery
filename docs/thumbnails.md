@@ -10,7 +10,7 @@ sidebar_label: Thumbnails
 
 The plugin automatically creates thumbnails of your images the first time the gallery for that folder is loaded. These are placed in a folder inside the original image folder, called “rc_thumbs”.
 
-You may notice that there are quite a few thumbnails – 4 for each image. That’s because RC Gallery makes use of the latest standards, and will automatically serve up the best image for the user’s browser / display density.
+You may notice that there are quite a few thumbnails – 4 for each image. That’s because Snap Gallery makes use of the latest standards, and will automatically serve up the best image for the user’s browser / display density.
 
 WebP images are delivered for browsers that support the format, because webp files are ~30% smaller than a jpeg of the same quality. Higher resolution thumbnails are delivered on higher density displays (4k or ‘Retina’ displays, for example).
 

@@ -1,17 +1,16 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use RichCourt\Plugin\Content\SnapGallery\Helper\TagUtils;
 
-class RCGalleyTagUtilsTest extends TestCase
+class SnapGalleryTagUtilsTest extends TestCase
 {
     /**
      * @dataProvider providesArticleTextsAndGalleryTagMatches
      */
     public function testFindMatches(?array $expected, string $original): void
     {
-        require_once __DIR__ . '/../src/utils/RCGalleryTagUtils.php';
-
-        $this->assertSame($expected, RCGalleryTagUtils::findMatches($original));
+        $this->assertSame($expected, TagUtils::findMatches($original));
     }
 
     public function providesArticleTextsAndGalleryTagMatches(): array

@@ -13,7 +13,7 @@ sidebar_label: Installation
 
 ## Install
 
-Download the latest ZIP from the [Releases page](https://github.com/dious38/rc-gallery/releases), then install it via **System > Install > Upload Package File** in your Joomla admin. The plugin can then be found under **System > Plugins > RC Gallery**.
+Download the latest ZIP from the [Releases page](https://github.com/dious38/rc-gallery/releases), then install it via **System > Install > Upload Package File** in your Joomla admin. The plugin can then be found under **System > Plugins > Snap Gallery**.
 
 ## Uninstall
 

@@ -1,1 +1,1 @@
-UPDATE #__extensions SET enabled = '1' WHERE element = 'rc_gallery';
+UPDATE #__extensions SET enabled = '1' WHERE element = 'snap_gallery';

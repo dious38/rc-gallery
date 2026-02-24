@@ -1,19 +1,19 @@
 jQuery(document).ready(function () {
-    var rcGallery = new RCGallery();
-    rcGallery.lazyLoadImages();
+    var snapGallery = new SnapGallery();
+    snapGallery.lazyLoadImages();
 });
 
-var RCGallery = function () {
+var SnapGallery = function () {
     "use strict";
 
     return {
         lazyLoadImages: function () {
-            var imageContainers = document.querySelectorAll(".rc_galleryimg_container"),
-                rcGallery = this;
+            var imageContainers = document.querySelectorAll(".snap_galleryimg_container"),
+                snapGallery = this;
 
             [].forEach.call(imageContainers, function (imageContainer) {
                 if (imageContainer.dataset.thumbsexist === "true") {
-                    rcGallery.populateThumbnail(imageContainer);
+                    snapGallery.populateThumbnail(imageContainer);
                     return;
                 }
 
@@ -26,7 +26,7 @@ var RCGallery = function () {
 
                 xhr.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                        rcGallery.populateThumbnail(imageContainer);
+                        snapGallery.populateThumbnail(imageContainer);
                     }
                 };
 

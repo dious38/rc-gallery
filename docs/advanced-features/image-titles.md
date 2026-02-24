@@ -11,7 +11,7 @@ sidebar_label: Image titles
 
 If you like having titles showing over your image thumbnails, but would prefer not to use the image’s file names, you can specify your own titles. To do this, follow these steps:
 
-* In the plugin’s admin page (**Extensions > Plugins > RC Gallery**), enable the "**Get titles from labels.txt**" option, and choose how you’d like image titles to be displayed.
+* In the plugin’s admin page (**Extensions > Plugins > Snap Gallery**), enable the "**Get titles from labels.txt**" option, and choose how you’d like image titles to be displayed.
 
 * Create a new text file, and place it in the folder with your images. This file should be called labels.txt.
 

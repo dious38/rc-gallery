@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\Helper;
+namespace RichCourt\Plugin\Content\SnapGallery\Helper;
 
 defined('_JEXEC') or die;
 
@@ -165,13 +165,13 @@ class ThumbnailFactory
         imagedestroy($this->getImageResized());
 
         if (!$success) {
-            throw new \Exception(Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_THUMBNAIL_CREATE', $finalSavePath));
+            throw new \Exception(Text::sprintf('PLG_CONTENT_SNAP_GALLERY_ERROR_THUMBNAIL_CREATE', $finalSavePath));
         }
 
         clearstatcache();
 
         if (!file_exists($finalSavePath)) {
-            throw new \Exception(Text::sprintf('PLG_CONTENT_RC_GALLERY_ERROR_THUMBNAIL_SAVE', $finalSavePath));
+            throw new \Exception(Text::sprintf('PLG_CONTENT_SNAP_GALLERY_ERROR_THUMBNAIL_SAVE', $finalSavePath));
         }
     }
 

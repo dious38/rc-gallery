@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\View;
+namespace RichCourt\Plugin\Content\SnapGallery\View;
 
 defined('_JEXEC') or die;
 
@@ -70,7 +70,7 @@ class ThumbnailView
     {
         $linkElem = $this->buildLink();
         $divElem = $this->getDom()->createElement('div');
-        $divElem->setAttribute('class', 'rc_galleryimg_container');
+        $divElem->setAttribute('class', 'snap_galleryimg_container');
         $divElem->setAttribute('data-thumbsexist', $this->getThumbsExist() ? 'true' : 'false');
         $divElem->setAttribute('id', str_replace(' ', '_', sprintf(
             'rc_%s_%d_%d',
@@ -104,7 +104,7 @@ class ThumbnailView
     {
         $elem = $this->getDom()->createElement('a');
         $elem->setAttribute('href', $this->getTargetUrl());
-        $elem->setAttribute('rel', 'shadowbox[rc_gallery]');
+        $elem->setAttribute('rel', 'shadowbox[snap_gallery]');
         $elem->setAttribute('data-imageTitle', $this->getTitle());
 
         return $elem;
@@ -154,7 +154,7 @@ class ThumbnailView
     private function buildImage($src)
     {
         $elem = $this->getDom()->createElement('img');
-        $elem->setAttribute('class', 'rc_galleryimg');
+        $elem->setAttribute('class', 'snap_galleryimg');
         $elem->setAttribute('data-src', $src);
         $elem->setAttribute('style', sprintf(
             "margin: %dpx;",

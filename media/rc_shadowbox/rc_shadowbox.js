@@ -45,10 +45,10 @@ var RCShadowbox = function () {
         setupSocialAddonButtons: function () {
             // Confirm the existence of the social addon
             if (typeof insertButton === "function") {
-                this.insertSocialButton(rc_gallery_social_addon_button1);
-                this.insertSocialButton(rc_gallery_social_addon_button2);
-                this.insertSocialButton(rc_gallery_social_addon_button3);
-                this.insertSocialButton(rc_gallery_social_addon_button4);
+                this.insertSocialButton(snap_gallery_social_addon_button1);
+                this.insertSocialButton(snap_gallery_social_addon_button2);
+                this.insertSocialButton(snap_gallery_social_addon_button3);
+                this.insertSocialButton(snap_gallery_social_addon_button4);
             }
         },
 
@@ -259,7 +259,7 @@ var RCShadowbox = function () {
                 var left = (window.innerWidth - 600) / 2;
                 var newWindowSettings = "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top=" + top + ",left=" + left;
                 var hashLinkToCurrentSlide = rcShadowbox.getCurrentSlide().shadowboxAnchor.childNodes[0].id;
-                var fullUrl = baseShareLink + rc_gallery_social_addon_pageURL + "%23" + hashLinkToCurrentSlide;
+                var fullUrl = baseShareLink + snap_gallery_social_addon_pageURL + "%23" + hashLinkToCurrentSlide;
 
                 window.open(
                     fullUrl,

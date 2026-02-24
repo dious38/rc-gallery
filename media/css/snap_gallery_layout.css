@@ -1,4 +1,4 @@
-.rc_gallery {
+.snap_gallery {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -8,11 +8,11 @@
     line-height: 1px;
     font-size: 1px;
 }
-.rc_gallery * {
+.snap_gallery * {
     /* mitigate interference from templates */
     margin: 0; padding: 0; border: 0; width: auto; height: auto; display: initial; position: initial; box-shadow: none;
 }
-.rc_gallery a {
+.snap_gallery a {
     margin: 0;
     padding: 0;
     border: 0;
@@ -20,12 +20,12 @@
     line-height: 1px;
     font-size: 1px;
 }
-.rc_gallery a:hover, .rc_gallery a:active {
+.snap_gallery a:hover, .snap_gallery a:active {
     background: transparent;
     line-height: 1px;
     font-size: 1px;
 }
-.rc_gallery div.rc_galleryimg_container {
+.snap_gallery div.snap_galleryimg_container {
     width: auto;
     height: auto;
     padding: 0;
@@ -33,7 +33,7 @@
     position: relative;
     display: inline-block;
 }
-.rc_gallery div.rc_galleryimg_container span {
+.snap_gallery div.snap_galleryimg_container span {
     height: auto;
     padding: 2px 5px;
     margin: 0 auto;
@@ -46,10 +46,10 @@
     transition: opacity 0.3s ease;
     box-sizing: border-box;
 }
-.rc_gallery div.rc_galleryimg_container:hover span {
+.snap_gallery div.snap_galleryimg_container:hover span {
     opacity: 1;
 }
-.rc_gallery img.rc_galleryimg {
+.snap_gallery img.snap_galleryimg {
     margin: 0;
     padding: 0;
     border: 0;
@@ -60,7 +60,7 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-div.rc_gallery_error {
+div.snap_gallery_error {
     width: auto;
     max-width: 100%;
     text-align: center;
@@ -70,14 +70,14 @@ div.rc_gallery_error {
     border-radius: 2px;
     padding: 10px;
 }
-div.rc_gallery_error h3 {
+div.snap_gallery_error h3 {
     color: #F44336;
 }
-div.rc_gallery_error p {
+div.snap_gallery_error p {
     margin: 0;
     padding: 0;
 }
-div.rc_gallery_debug_info {
+div.snap_gallery_debug_info {
     width: auto;
     max-width: 100%;
     text-align: center;

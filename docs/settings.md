@@ -6,7 +6,7 @@ sidebar_label: Settings
 
 # Settings
 
-RC Gallery is pre-configured to give you beautiful responsive galleries straight out of the box. However, if there’s anything you do want to change, the following settings are available from the plugin’s admin page.
+Snap Gallery is pre-configured to give you beautiful responsive galleries straight out of the box. However, if there’s anything you do want to change, the following settings are available from the plugin’s admin page.
 
 > [!NOTE] **Inline settings** -
 > As well as being able to change these settings on the plugin’s admin page, you can also change some settings individually for each gallery. See the inline settings section of the docs for more info.

@@ -1,13 +1,13 @@
-# RC Gallery for Joomla 5/6
+# Snap Gallery for Joomla 5/6
 
-[![Version](https://img.shields.io/badge/version-5.0.2-blue.svg)](https://github.com/dious38/rc-gallery/releases/tag/v5.0.2)
+[![Version](https://img.shields.io/badge/version-6.0.0-blue.svg)](https://github.com/dious38/rc-gallery/releases/tag/v6.0.0)
 [![Joomla](https://img.shields.io/badge/Joomla-5%20%2F%206-orange.svg)](https://www.joomla.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/license-GPL--2.0-green.svg)](LICENSE)
 
 A responsive gallery plugin for Joomla that displays beautiful edge-to-edge image galleries in your articles via simple `{gallery}folder{/gallery}` tags.
 
-This is an actively maintained fork of [TheRichCourt/rc-gallery](https://github.com/TheRichCourt/rc-gallery), fully rewritten for **Joomla 5/6** compatibility with modern PHP 8.1+ support.
+Snap Gallery is a fork of [RC Gallery](https://github.com/TheRichCourt/rc-gallery) by Rich Court, fully rewritten for **Joomla 5/6** compatibility with modern PHP 8.1+ support. It is published on the [Joomla Extensions Directory (JED)](https://extensions.joomla.org/) as an independent extension.
 
 ## Features
 
@@ -51,6 +51,11 @@ Override default settings for a specific gallery:
 
 ## Changelog
 
+### v6.0.0
+- Renamed from RC Gallery to Snap Gallery for JED publication
+- Added update server for automatic updates via Joomla
+- New version numbering (6.0.0)
+
 ### v5.0.2
 - Fix RC Shadowbox with single-image galleries (image disappearing, prev/next arrows hidden)
 
@@ -72,4 +77,4 @@ Override default settings for a specific gallery:
 
 ## Credits
 
-Originally created by [Rich Court](https://github.com/TheRichCourt). This fork is maintained by [dious38](https://github.com/dious38) under the same GPL-2.0 license.
+Originally created by [Rich Court](https://github.com/TheRichCourt) as RC Gallery. This fork is maintained by [dious38](https://github.com/dious38) under the same GPL-2.0 license.

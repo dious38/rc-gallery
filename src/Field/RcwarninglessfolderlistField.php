@@ -1,6 +1,6 @@
 <?php
 
-namespace RichCourt\Plugin\Content\RcGallery\Field;
+namespace RichCourt\Plugin\Content\SnapGallery\Field;
 
 defined('_JEXEC') or die;
 
