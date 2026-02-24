@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>therichcourt@gmail.com</authorEmail>
     <authorUrl>www.therichcourt.com</authorUrl>
-    <version>5.0.1</version>
+    <version>5.0.2</version>
     <description>PLG_CONTENT_RC_GALLERY_DESCRIPTION</description>
 
     <namespace path="src">RichCourt\Plugin\Content\RcGallery</namespace>

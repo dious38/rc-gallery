@@ -310,41 +310,54 @@ var RCShadowbox = function () {
                 loadingIcon.classList.add("rc_hidden");
             }
 
-            // deal with previous and next slides
-            var prevSlide = this.getPrevSlide();
+            // hide prev/next buttons and skip transitions when there's only one image
+            if (slides.length <= 1) {
+                prevButton.style.display = "none";
+                nextButton.style.display = "none";
+            } else {
+                prevButton.style.display = "";
+                nextButton.style.display = "";
 
-            if (!prevSlide.slideElem.classList.contains("rc_sb_hidden_centre")) {
-                prevSlide.slideElem.classList.add("rc_sb_hidden_left");
+                // deal with previous and next slides
+                var prevSlide = this.getPrevSlide();
 
-                setTimeout(function () {
-                    // as we're doing this after a delay, check that the user hasn't already come back to this slide
-                    if (prevSlide.id !== currentSlideId) {
-                        prevSlide.slideElem.classList.remove("rc_sb_hidden_left");
-                        prevSlide.slideElem.classList.add("rc_sb_hidden_centre");
-                    }
-                }, 560);
-            }
+                if (!prevSlide.slideElem.classList.contains("rc_sb_hidden_centre")) {
+                    prevSlide.slideElem.classList.add("rc_sb_hidden_left");
 
-            var nextSlide = this.getNextSlide();
+                    setTimeout(function () {
+                        // as we're doing this after a delay, check that the user hasn't already come back to this slide
+                        if (prevSlide.id !== currentSlideId) {
+                            prevSlide.slideElem.classList.remove("rc_sb_hidden_left");
+                            prevSlide.slideElem.classList.add("rc_sb_hidden_centre");
+                        }
+                    }, 560);
+                }
 
-            if (!nextSlide.slideElem.classList.contains("rc_sb_hidden_centre")) {
-                nextSlide.slideElem.classList.add("rc_sb_hidden_right");
+                var nextSlide = this.getNextSlide();
 
-                setTimeout(function () {
-                    if (nextSlide.id !== currentSlideId) {
-                        nextSlide.slideElem.classList.remove("rc_sb_hidden_right");
-                        nextSlide.slideElem.classList.add("rc_sb_hidden_centre");
-                    }
-                }, 560);
+                if (!nextSlide.slideElem.classList.contains("rc_sb_hidden_centre")) {
+                    nextSlide.slideElem.classList.add("rc_sb_hidden_right");
+
+                    setTimeout(function () {
+                        if (nextSlide.id !== currentSlideId) {
+                            nextSlide.slideElem.classList.remove("rc_sb_hidden_right");
+                            nextSlide.slideElem.classList.add("rc_sb_hidden_centre");
+                        }
+                    }, 560);
+                }
             }
         },
 
         nextSlide: function () {
-            this.openSlide(this.getNextSlide());
+            if (slides.length > 1) {
+                this.openSlide(this.getNextSlide());
+            }
         },
 
         prevSlide: function () {
-            this.openSlide(this.getPrevSlide());
+            if (slides.length > 1) {
+                this.openSlide(this.getPrevSlide());
+            }
         },
 
         getCurrentSlide: function () {
