@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @package    Snap Gallery
+ * @copyright  Copyright (C) 2018 Rich Court. Copyright (C) 2026 Dious. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
 namespace RichCourt\Plugin\Content\SnapGallery\View;
 
 defined('_JEXEC') or die;
