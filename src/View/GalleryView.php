@@ -40,13 +40,11 @@ class GalleryView
             . ' data-startheight="' . $this->getRCParams()->minrowheight . '"'
             . ' data-marginsize="' . $this->getRCParams()->imagemargin . '"';
 
-        $layout = $this->getRcParams()->layout === null
-            ? ''
-            : $this->getRcParams()->layout;
+        $layout = $this->getRcParams()->layout ?: 'justified';
 
-        $galleryClass = strtolower($layout);
+        $galleryClass = 'snap_gallery_' . strtolower($layout);
 
-        $this->html = '<div id="snap_gallery_' . $this->getGalleryNumber() . '" class="snap_gallery rc_' . $galleryClass . '" ' . $galleryParams . '>';
+        $this->html = '<div id="snap_gallery_' . $this->getGalleryNumber() . '" class="snap_gallery ' . $galleryClass . '" ' . $galleryParams . '>';
     }
 
     /**
@@ -124,25 +122,13 @@ class GalleryView
             ['version' => 'auto']
         );
 
-        if (!$this->getRCParams()->layout) {
-            // Default layout JS
+        $layout = $this->getRcParams()->layout ?: 'justified';
+
+        if ($layout !== 'square_grid') {
+            // Justified layout: load JS for row resizing
             $wa->registerAndUseScript(
                 'plg_content_snap_gallery.gallery_layout',
                 $mediaUrl . 'js/snap_gallery_layout.min.js',
-                ['version' => 'auto']
-            );
-        } else {
-            // Custom layout from external layout media folder
-            $layoutName = $this->getRcParams()->layout;
-
-            $wa->registerAndUseScript(
-                'plg_content_snap_gallery.layout_custom',
-                'media/plg_rc_gallery_layouts/' . $layoutName . '/snap_gallery_layout.min.js',
-                ['version' => 'auto']
-            );
-            $wa->registerAndUseStyle(
-                'plg_content_snap_gallery.layout_custom',
-                'media/plg_rc_gallery_layouts/' . $layoutName . '/snap_gallery_layout.css',
                 ['version' => 'auto']
             );
         }
@@ -209,6 +195,19 @@ class GalleryView
 				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery .snap_galleryimg:hover {
 					filter: grayscale(0%);
 					-webkit-filter: grayscale(0%);
+				}
+			';
+        }
+
+        $layout = $this->getRcParams()->layout ?: 'justified';
+
+        if ($layout === 'square_grid') {
+            $css .= '
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery_square_grid {
+					gap: ' . (int) $this->getRcParams()->imagemargin . 'px;
+				}
+				#snap_gallery_' . $this->getGalleryNumber() . '.snap_gallery_square_grid .snap_galleryimg {
+					margin: 0 !important;
 				}
 			';
         }

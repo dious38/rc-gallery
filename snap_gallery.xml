@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>therichcourt@gmail.com</authorEmail>
     <authorUrl>www.therichcourt.com</authorUrl>
-    <version>6.0.0</version>
+    <version>6.0.1</version>
     <description>PLG_CONTENT_SNAP_GALLERY_DESCRIPTION</description>
 
     <namespace path="src">RichCourt\Plugin\Content\SnapGallery</namespace>
@@ -61,19 +61,10 @@
             <fieldset name="gallery" label="PLG_CONTENT_SNAP_GALLERY_FIELDSET_GALLERY">
                 <field name="gallerydescription" type="note" label="PLG_CONTENT_SNAP_GALLERY_GALLERYDESCRIPTION_LABEL" description=""/>
                 <field name="galleryfolder" type="text" default="images" label="PLG_CONTENT_SNAP_GALLERY_GALLERYFOLDER_LABEL" description="PLG_CONTENT_SNAP_GALLERY_GALLERYFOLDER_DESC"/>
-                <field
-                    name="layout"
-                    type="rcwarninglessfolderlist"
-                    default=""
-                    label="PLG_CONTENT_SNAP_GALLERY_LAYOUT_LABEL"
-                    directory="media/plg_rc_gallery_layouts"
-                    filter=""
-                    exclude=""
-                    stripext=""
-                    hide_none="true"
-                    description="PLG_CONTENT_SNAP_GALLERY_LAYOUT_DESC"
-                    addfieldprefix="RichCourt\Plugin\Content\SnapGallery\Field"
-                />
+                <field name="layout" type="radio" default="justified" label="PLG_CONTENT_SNAP_GALLERY_LAYOUT_LABEL" description="PLG_CONTENT_SNAP_GALLERY_LAYOUT_DESC">
+                    <option value="justified">PLG_CONTENT_SNAP_GALLERY_LAYOUT_OPT_JUSTIFIED</option>
+                    <option value="square_grid">PLG_CONTENT_SNAP_GALLERY_LAYOUT_OPT_SQUARE_GRID</option>
+                </field>
                 <field name="sorttype" type="radio" default="0" description="PLG_CONTENT_SNAP_GALLERY_SORTTYPE_DESC" label="PLG_CONTENT_SNAP_GALLERY_SORTTYPE_LABEL">
                     <option value="0">PLG_CONTENT_SNAP_GALLERY_SORTTYPE_OPT_FILENAME</option>
                     <option value="1">PLG_CONTENT_SNAP_GALLERY_SORTTYPE_OPT_DATE</option>

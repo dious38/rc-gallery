@@ -89,3 +89,27 @@ div.snap_gallery_debug_info {
     margin: 10px;
     display: inline-block;
 }
+/* Square Grid layout */
+.snap_gallery.snap_gallery_square_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0;
+    line-height: normal;
+    font-size: initial;
+}
+.snap_gallery.snap_gallery_square_grid a {
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+.snap_gallery.snap_gallery_square_grid div.snap_galleryimg_container {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.snap_gallery.snap_gallery_square_grid img.snap_galleryimg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}

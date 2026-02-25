@@ -84,7 +84,7 @@ class ParamsHelper
             'overlayblur' => 0,
             'shadowboxtitle' => 0,
             'ajaximages' => 0,
-            'layout' => null,
+            'layout' => 'justified',
             'shadowboxanimations' => 'default',
             'hidescrollbar' => 0,
         ]);
