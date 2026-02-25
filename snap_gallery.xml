@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="content" method="upgrade">
     <name>Snap Gallery</name>
-    <author>Rich Court</author>
+    <author>Dious</author>
     <creationDate>11/12/2022</creationDate>
-    <copyright>Copyright (C) 2018 Rich Court. All rights reserved.</copyright>
+    <copyright>Copyright (C) 2018 Rich Court. Copyright (C) 2026 Dious.</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-    <authorEmail>therichcourt@gmail.com</authorEmail>
-    <authorUrl>www.therichcourt.com</authorUrl>
-    <version>6.0.1</version>
+    <authorUrl>www.dious.fr</authorUrl>
+    <version>6.1.0</version>
     <description>PLG_CONTENT_SNAP_GALLERY_DESCRIPTION</description>
 
     <namespace path="src">RichCourt\Plugin\Content\SnapGallery</namespace>
