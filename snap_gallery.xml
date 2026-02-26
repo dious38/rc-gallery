@@ -6,7 +6,7 @@
     <copyright>Copyright (C) 2018 Rich Court. Copyright (C) 2026 Dious.</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorUrl>www.dious.fr</authorUrl>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <description>PLG_CONTENT_SNAP_GALLERY_DESCRIPTION</description>
 
     <namespace path="src">RichCourt\Plugin\Content\SnapGallery</namespace>
