@@ -7,31 +7,10 @@
         <element>pkg_snap_gallery</element>
         <type>package</type>
         <client>site</client>
-        <version>6.1.5</version>
+        <version>6.1.6</version>
         <infourl title="Snap Gallery">https://github.com/dious38/rc-gallery</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/dious38/rc-gallery/releases/download/v6.1.5/pkg_snap_gallery.zip</downloadurl>
-        </downloads>
-        <tags>
-            <tag>stable</tag>
-        </tags>
-        <maintainer>Dious</maintainer>
-        <maintainerurl>https://www.dious.fr</maintainerurl>
-        <targetplatform name="joomla" version="(5|6)\.[0-9]" />
-        <php_minimum>8.1.0</php_minimum>
-    </update>
-    <!-- Plugin update (for users who installed the plugin standalone) -->
-    <update>
-        <name>Snap Gallery</name>
-        <description>Snap Gallery - Responsive image gallery plugin for Joomla</description>
-        <element>snap_gallery</element>
-        <type>plugin</type>
-        <folder>content</folder>
-        <client>site</client>
-        <version>6.1.5</version>
-        <infourl title="Snap Gallery">https://github.com/dious38/rc-gallery</infourl>
-        <downloads>
-            <downloadurl type="full" format="zip">https://github.com/dious38/rc-gallery/releases/download/v6.1.5/plg_content_snap_gallery.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/dious38/rc-gallery/releases/download/v6.1.6/pkg_snap_gallery.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
