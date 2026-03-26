@@ -7,7 +7,7 @@
 
 A responsive gallery plugin for Joomla that displays beautiful edge-to-edge image galleries in your articles via simple `{gallery}folder{/gallery}` tags.
 
-Snap Gallery is a fork of [RC Gallery](https://github.com/TheRichCourt/rc-gallery) by Rich Court, fully rewritten for **Joomla 5/6** compatibility with modern PHP 8.1+ support. Submitted to the [Joomla Extensions Directory (JED)](https://extensions.joomla.org/).
+Snap Gallery is a fork of [RC Gallery](https://github.com/TheRichCourt/rc-gallery) by Rich Court, fully rewritten for **Joomla 5/6** compatibility with modern PHP 8.1+ support. Submitted to the [Joomla Extensions Directory (JED)](https://extensions.joomla.org/extension/photos-a-images/galleries/snap-gallery/).
 
 ## Features
 
